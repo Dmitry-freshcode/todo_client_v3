@@ -1,0 +1,23 @@
+@import '../../styles/reset.css';
+
+.container{
+    font-family: 'Kufam', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*align-items: center;*/
+    background-color: rgb(255, 248, 247);
+    height: 100vh;
+    width: 100vw;
+}
+
+button{
+    margin-left: 10px;
+    }
+
+
+
+
+
+
+

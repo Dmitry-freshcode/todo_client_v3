@@ -1,0 +1,25 @@
+.loginForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100px;
+    
+}
+
+.loginForm .header input{
+    margin-left: 10px;
+    max-width: 200px;
+    min-width: 100px;
+    height: 15px;    
+}
+
+.loginForm .login{
+    margin-right: 20px;
+    }
+.loginForm .password{
+    margin-right: 20px;
+ }
+.passwordInput, .loginInput{
+    width: 150px;
+}
