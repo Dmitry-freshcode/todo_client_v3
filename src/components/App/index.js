@@ -4,6 +4,7 @@ import TodoContainer from './TodoListContainer'
 import Footer from './Footer'
 import styles from './App.module.scss';
 import { connect } from "react-redux";
+import {setToken} from '../../store/actionCreater.js'
 
 
 class App extends Component {
@@ -15,14 +16,8 @@ class App extends Component {
       }
 
      componentDidMount(){
-        const token = localStorage.getItem('access_token')
-        const isLogin =  (token) ? true : false;
-        this.setState({
-            isLogin: isLogin
-        })
-        console.log(localStorage.getItem('access_token'));   
-       
-    }
+        const token = localStorage.getItem('access_token')        
+        this.props.setToken(token)}
     render() {
              
         return (
@@ -43,7 +38,7 @@ function mapStateToProps( state){
   };
   const mapDispatchToProps =dispatch =>{
     return{
-      
+        setToken: (token)=>dispatch(setToken(token)),
     }
   }
   export default connect(mapStateToProps,mapDispatchToProps)(App)

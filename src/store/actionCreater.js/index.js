@@ -1,4 +1,4 @@
-import {SET_TOKEN} from '../constants/index'
+import {SET_TOKEN,DELETE_TOKEN} from '../constants/index'
 
 const setToken =(token) => {
     return{  
@@ -7,4 +7,10 @@ const setToken =(token) => {
     }
 };
 
-export {setToken}
+const deleteToken =() => {
+    return{  
+        type: DELETE_TOKEN             
+    }
+};
+
+export {setToken,deleteToken}

@@ -23,26 +23,17 @@ class LoginForm extends Component {
     this.setState({ createdUser: this.state.username ,username:'', password:''});    
   }
 
-  loginUser = async () => {
-    // this.setState({userError:false});
-    // let loginError;
-    //const response = await API.get('/');
+  loginUser = async () => {    
     const response = await API.post('/auth/login/',{
       username: this.state.username,
       password: this.state.password
     }).catch(function (error) {
-      console.log(error);
-      //loginError=true;
+      console.log(error);      
     });
     const token = response.data.access_token;
     localStorage.setItem('access_token',token);
     this.props.setToken(token)
-    console.log(response.data.access_token);
-
-    // if(response && response.data.access_token){
-    //   this.props.callback(this.state.username , response.data.access_token);
-    // }
-    // if(loginError){this.setState({userError:loginError})};
+    
   };
 
   logoutUser = () =>{
