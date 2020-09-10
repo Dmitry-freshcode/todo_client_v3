@@ -1,6 +1,8 @@
-import {SET_TOKEN,DELETE_TOKEN} from '../constants/index'
+import {SET_TOKEN,DELETE_TOKEN} from '../constants/token'
+
 
 const setToken =(token) => {
+    //console.log(token)
     return{  
         type: SET_TOKEN,
         payload: token      
@@ -12,5 +14,6 @@ const deleteToken =() => {
         type: DELETE_TOKEN             
     }
 };
+
 
 export {setToken,deleteToken}
