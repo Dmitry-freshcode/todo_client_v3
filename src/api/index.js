@@ -15,13 +15,12 @@ export const loginUser = async (data) =>{
     const response = await API.post('/auth/login',{
       username: data.username,
       password: data.password      
-    }); 
- 
-    console.log(response.data);
+    })      
     return response; 
-  }catch(e){    
-    return {error:401}
   }
+   catch(e){        
+     return e.response.data;
+ }
           
 }
 
@@ -32,6 +31,20 @@ export const addUser = async (data) =>{
       username: data.username,
       password: data.password      
     }); 
+    //console.log(response);
+    return response; 
+  }catch(e){       
+    return e;
+  }          
+}
+
+export const getProfile = async (token) =>{    
+  try{
+
+    const response = await API.get('/users/profile',{headers:{
+      Authorization: `Bearer ${token}`
+    }
+  }); 
     console.log(response);
     return response; 
   }catch(e){       

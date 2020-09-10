@@ -1,4 +1,4 @@
-import { USER_LOGIN,USER_AUTOLOGIN,USER_LOGOUT,USER_ADD} from '../constants/user';
+import { USER_LOGIN,USER_AUTOLOGIN,USER_LOGOUT,USER_ADD,USER_ADD_NAME} from '../constants/user';
 
 
 const loginUser = (data) =>{
@@ -24,5 +24,11 @@ const addUser = (data) =>{
         payload: data       
     }
 }
+const setName = (name) =>{
+    return{
+        type: USER_ADD_NAME, 
+        payload: name       
+    }
+}
 
-export {loginUser,logoutUser,autologinUser,addUser};
+export {loginUser,logoutUser,autologinUser,addUser,setName};

@@ -14,32 +14,6 @@ class LoginForm extends Component {
         };
       }
 
-
-  // createUser = async () =>{
-  //   this.setState({userError:false});
-  //   await API.post('/users/',{
-  //     username: this.state.username,
-  //     password: this.state.password
-  //   });
-  //   this.setState({ createdUser: this.state.username ,username:'', password:''});    
-  // }
-
-  // loginUser = async () => {    
-  //   const response = await API.post('/auth/login/',{
-  //     username: this.state.username,
-  //     password: this.state.password
-  //   }).catch(function (error) {
-  //     console.log(error);      
-  //   });
-  //   const token = response.data.access_token;
-  //   localStorage.setItem('access_token',token);
-  //   this.props.setToken(token)
-    
-  // };
-
-  // logoutUser = () =>{
-  //   localStorage.removeItem('access_token');
-  // }
   addNewUser =()=>{
     this.props.addUser({username: this.state.username,password: this.state.password});
     this.setState({
@@ -55,7 +29,7 @@ class LoginForm extends Component {
   changeName = (event) => {    
     this.setState({ username: event.target.value });
   };
-    render() {
+    render() {     
         return (
             <div className={styles.loginForm}>
                 <label className={styles.login}>
@@ -65,11 +39,11 @@ class LoginForm extends Component {
                 <label className={styles.password}>
                     Password
                     <input onChange={this.changePassword} value={this.state.password} type="text" className={styles.loginInput}/>
-                </label>
-                <button id="loginUser" onClick={()=>this.props.loginUser({username: this.state.username,password: this.state.password})}>Login</button>
-                <button id="addUser" onClick={this.addNewUser}>Add</button>
+                </label>                
+                <button disabled={!this.state.username}onClick={()=>this.props.loginUser({username: this.state.username,password: this.state.password})}>Login</button>
+                <button disabled={!this.state.password}onClick={this.addNewUser}>Add</button>
                 {this.props.loginError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>}
-                {/* {this.props.userNameError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>} */}
+                {this.props.loginExError && <div className={styles.error}>USERNAME IS EXIST</div>}
             </div>                  
         )
     }
@@ -79,6 +53,7 @@ class LoginForm extends Component {
 function mapStateToProps(state){
   return {
     loginError: state.errors.loginError,
+    loginExError: state.errors.loginExError,
     //userNameError: state.errors.userNameError
    } 
 };

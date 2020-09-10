@@ -1,8 +1,7 @@
 import {SET_TOKEN,DELETE_TOKEN} from '../constants/token'
 
 
-const setToken =(token) => {
-    //console.log(token)
+const setToken =(token) => {    
     return{  
         type: SET_TOKEN,
         payload: token      
