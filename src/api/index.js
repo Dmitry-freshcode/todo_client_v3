@@ -16,7 +16,8 @@ export const loginUser = async (data) =>{
       username: data.username,
       password: data.password      
     }); 
-    //console.log(response.data);
+ 
+    console.log(response.data);
     return response; 
   }catch(e){    
     return {error:401}
@@ -26,15 +27,15 @@ export const loginUser = async (data) =>{
 
 export const addUser = async (data) =>{    
   try{
+
     const response = await API.post('/users/add',{
       username: data.username,
       password: data.password      
     }); 
-    //console.log(response.data);
+    console.log(response);
     return response; 
-  }catch(e){ 
-    console.log(e);  
-    //return {error:401}
+  }catch(e){       
+    return e;
   }
           
 }

@@ -43,5 +43,15 @@ export function* workerAutologin(){
 export function* workerAddUser(data){
     //console.log(data);
     const response = yield addUser(data.payload);
-    console.log(response);
+    console.log(response.data.status);
+    if(response.data.status === 'userIsExist'){
+         
+          yield put(addLoginError());
+          yield delay(2000);
+          yield put(subLoginError());
+         console.log('логин занят');
+     
+    }
+    
+    
 }
