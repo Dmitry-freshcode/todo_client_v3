@@ -4,3 +4,6 @@ export const ERROR_LOGIN_OFF = 'ERROR_LOGIN_OFF';
 
 export const ERROR_EX_LOGIN_ON = 'ERROR_EX_LOGIN_ON';
 export const ERROR_EX_LOGIN_OFF = 'ERROR_EX_LOGIN_OFF';
+
+export const ERROR_USER_ADD_OFF = 'ERROR_USER_ADD_OFF';
+export const ERROR_USER_ADD_ON = 'ERROR_USER_ADD_ON';

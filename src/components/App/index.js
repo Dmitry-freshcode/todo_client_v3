@@ -5,7 +5,7 @@ import Footer from './Footer'
 import styles from './App.module.scss';
 import { connect } from "react-redux";
 import {autologinUser} from '../../store/actionCreater/user'
-import {setToken} from '../../store/actionCreater/index'
+//import {setToken} from '../../store/actionCreater/index'
 
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
             <div className={styles.container}>
                 <Header />
                 {this.props.token && <p>login</p>}
-                {/* <TodoContainer />  */}
+                <TodoContainer /> 
                 <Footer />               
             </div>
         )

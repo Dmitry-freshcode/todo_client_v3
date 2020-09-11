@@ -14,15 +14,22 @@ class LoginForm extends Component {
         };
       }
 
-  addNewUser =()=>{
+  addNewUser =() =>{
     this.props.addUser({username: this.state.username,password: this.state.password});
     this.setState({
       username: '',      
       password:'', 
     })
   }
+  userLogin = () =>{
+    this.props.loginUser({username: this.state.username,password: this.state.password})
+    this.setState({
+      username: '',      
+      password:'', 
+    })
+  }
 
-  changePassword = (event) => {
+  changePassword = (event) => {    
     this.setState({ password: event.target.value });
   };
 
@@ -34,16 +41,17 @@ class LoginForm extends Component {
             <div className={styles.loginForm}>
                 <label className={styles.login}>
                     Login
-                    <input type="text" onChange={this.changeName} value={this.state.username} className={styles.passwordInput}/>
+                    <input type="text" onChange={this.changeName}  className={styles.passwordInput}/>
                 </label>
                 <label className={styles.password}>
                     Password
                     <input onChange={this.changePassword} value={this.state.password} type="text" className={styles.loginInput}/>
                 </label>                
-                <button disabled={!this.state.username}onClick={()=>this.props.loginUser({username: this.state.username,password: this.state.password})}>Login</button>
-                <button disabled={!this.state.password}onClick={this.addNewUser}>Add</button>
+                <button disabled={!(this.state.username && this.state.password)}onClick={this.userLogin}>Login</button>
+                <button disabled={!(this.state.username && this.state.password)}onClick={this.addNewUser}>Add</button>
                 {this.props.loginError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>}
                 {this.props.loginExError && <div className={styles.error}>USERNAME IS EXIST</div>}
+                {this.props.userAddError && <div className={styles.userAddError}>USERNAME WAS CREATED</div>}
             </div>                  
         )
     }
@@ -54,7 +62,7 @@ function mapStateToProps(state){
   return {
     loginError: state.errors.loginError,
     loginExError: state.errors.loginExError,
-    //userNameError: state.errors.userNameError
+    userAddError: state.errors.userAddError
    } 
 };
 const mapDispatchToProps =dispatch =>{

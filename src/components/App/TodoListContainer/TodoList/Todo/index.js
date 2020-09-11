@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import styles from './Todo.module.scss'
 
 export default class Todo extends Component {
-    render() {        
+    constructor(props) {
+        super(props);
+        
+      }
+    render() { 
+        //const { date}
         return (
             <li className={styles.todo}>
                 <div className={styles.data}>

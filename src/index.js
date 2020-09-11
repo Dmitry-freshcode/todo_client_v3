@@ -7,9 +7,9 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import initStore, { sagaMiddleware } from './store/configureStore';
 import rootSaga from './saga';
-import { helloSaga } from './saga/auth'
 
-const store = initStore();
+
+export const store = initStore();
 
 sagaMiddleware.run(rootSaga);
 

@@ -24,11 +24,11 @@ const addUser = (data) =>{
         payload: data       
     }
 }
-const setName = (name) =>{
+const addName = (name) =>{
     return{
         type: USER_ADD_NAME, 
         payload: name       
     }
 }
 
-export {loginUser,logoutUser,autologinUser,addUser,setName};
+export {loginUser,logoutUser,autologinUser,addUser,addName};

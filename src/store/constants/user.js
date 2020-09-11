@@ -7,14 +7,3 @@ export const USER_ADD_NAME = 'USER_ADD_NAME';
 
 
 
-
-export const SET_USER = 'SET_USER';
-
-export const AUTOLOGIN_USER = 'AUTOLOGIN_USER';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
-
-export const LOGOUT_USER = 'LOGOUT_USER';
-export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
-
-

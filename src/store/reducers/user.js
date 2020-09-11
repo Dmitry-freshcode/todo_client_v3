@@ -7,31 +7,21 @@ import {
 	//LOGOUT_USER_SUCCESS,
 } from '../constants/user';
 
-let name = '';
-let pass = '';
-//let token = localStorage.getItem('access_token');
-// if(token){
-// 	name = user.name;
-// 	pass = user.pass;
-// }
 
 const initialState = {
-	user: {
-		name: name,        
-        //token: token,
-	},
+	username: '',
 	isLogin: false,	
 }
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER_LOGIN:
+        case USER_LOGIN:			
 			return {
 				...state,
-                ...action.data,                				
+                username: action.payload.username,                				
 				isLogin: true
 			};
-        case USER_AUTOLOGIN:
+        case USER_AUTOLOGIN:			
             return {
 				...state,
                 ...action.data,                				
@@ -41,21 +31,15 @@ const userReducer = (state = initialState, action) => {
 			return {}
 		case USER_ADD_NAME:
 			return {
-				...state
+				...state,
+				username: action.payload,
 			}
 		case USER_LOGOUT:
 			return {
 			...state,
+			username:'',
 			isLogin: false
-		}
-        // case LOGOUT_USER_SUCCESS:
-        //     return {
-		// 		...state,
-		// 		user: {
-        //             name: '',
-        //             token: '',					
-		// 		},					
-		// 	};
+		}      
         default:
             return state;
     }
