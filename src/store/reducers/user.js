@@ -18,14 +18,14 @@ const userReducer = (state = initialState, action) => {
         case USER_LOGIN:			
 			return {
 				...state,
-                username: action.payload.username,                				
-				isLogin: true
+                //username: action.payload.username,                				
+				//isLogin: true
 			};
         case USER_AUTOLOGIN:			
             return {
 				...state,
-                ...action.data,                				
-				isLogin: true
+                ...action.data             				
+				
 			};
 		case USER_ADD:
 			return {}
@@ -33,6 +33,7 @@ const userReducer = (state = initialState, action) => {
 			return {
 				...state,
 				username: action.payload,
+				isLogin: true
 			}
 		case USER_LOGOUT:
 			return {

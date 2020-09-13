@@ -2,13 +2,14 @@ import {
     TODO_CREATE,
 	TODO_FIND_ALL,
 	TODO_SAVE_STATE,
+	TODO_DELETE_ALL,
     TODO_DELETE,
     TODO_UPDATE_STATE
 } from '../constants/todo';
 
 
 const initialState = {
-	todo: []
+	
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -22,6 +23,16 @@ const todoReducer = (state = initialState, action) => {
 				...state,
 				...action.payload
 			}
+		case TODO_DELETE_ALL:
+			return {
+				//todo:''
+			}
+		case TODO_DELETE:
+			console.log(action)
+			return 	{
+				...state				
+			};
+
 		// case USER_ADD:
 		// 	return {}
 		// case USER_ADD_NAME:

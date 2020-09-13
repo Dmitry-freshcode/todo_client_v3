@@ -9,7 +9,7 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          username: '',      
+          username:'',      
           password:'',         
         };
       }
@@ -22,11 +22,12 @@ class LoginForm extends Component {
     })
   }
   userLogin = () =>{
-    this.props.loginUser({username: this.state.username,password: this.state.password})
     this.setState({
-      username: '',      
+      username:'',      
       password:'', 
     })
+    this.props.loginUser({username: this.state.username,password: this.state.password})
+    
   }
 
   changePassword = (event) => {    
@@ -41,7 +42,7 @@ class LoginForm extends Component {
             <div className={styles.loginForm}>
                 <label className={styles.login}>
                     Login
-                    <input type="text" onChange={this.changeName}  className={styles.passwordInput}/>
+                    <input type="text" onChange={this.changeName} value={this.state.username} className={styles.passwordInput}/>
                 </label>
                 <label className={styles.password}>
                     Password

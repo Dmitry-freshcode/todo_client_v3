@@ -16,31 +16,23 @@ class TodoList extends Component {
       } 
 
 
-    render() {
-        console.log(this.state.todos);
-        const maps=[];
-        const todos = this.state.todos;
-        if (this.props.todo.length>0){
-            maps = todos.map(this.mapsTodos);
-            console.log(maps);
-            console.log(todos);
-        }
-        //console.log(maps);
+    render() {         
+        
+        const todos= Object.values(this.props.todos);
+        const maps = todos.map((todo,i) => <Todo key={todo._id} todo={todo}/>);        
+        //console.log(maps)  ; 
+       
         return (
             <ul className={styles.TodoList}>
-                {todos.length && maps}
-                <Todo />
-                <Todo />
-                <Todo />
-                <Todo />
+                { maps}               
             </ul>
         )
     }
 }
 
-function mapStateToProps( state){
+function mapStateToProps(state){
     return {        
-        todo: state.todo,
+        todos: state.todo,
      } 
   };
   const mapDispatchToProps =dispatch =>{

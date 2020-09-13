@@ -26,7 +26,6 @@ class App extends Component {
         return (
             <div className={styles.container}>
                 <Header />
-                {this.props.token && <p>login</p>}
                 <TodoContainer /> 
                 <Footer />               
             </div>
