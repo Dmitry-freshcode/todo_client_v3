@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Todo from './Todo';
 import styles from './TodoList.module.scss'
 import { connect } from "react-redux";
-import {findAllTodo} from '../../../../store/actionCreater/todo'
+//import {findAllTodo} from '../../../../store/actionCreater/todo'
 
 class TodoList extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class TodoList extends Component {
 
     render() {         
         
-        const todos= Object.values(this.props.todos);
+        const todos= this.props.todos.todos;
         const maps = todos.map((todo,i) => <Todo key={todo._id} todo={todo}/>);        
         //console.log(maps)  ; 
        

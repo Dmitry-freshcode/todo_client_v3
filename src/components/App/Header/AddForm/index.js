@@ -24,7 +24,8 @@ class AddForm extends Component {
     textSet = (event) =>{
         this.setState({ text: event.target.value });
     }
-    addTodo = () =>{
+    addTodo = (event) =>{
+        event.preventDefault();
         this.props.addTodo(  {
             username: this.props.username,
             name: this.state.text,            

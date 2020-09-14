@@ -4,7 +4,9 @@ import {
     TODO_DELETE,
     TODO_UPDATE_STATE,
     TODO_SAVE_STATE,
-    TODO_DELETE_ALL} from '../constants/todo';
+    TODO_DELETE_ALL,
+    TODO_EDIT_CURRENT
+} from '../constants/todo';
 
 const addTodo = (data) =>{    
     return{
@@ -12,8 +14,7 @@ const addTodo = (data) =>{
         payload: data       
     }
 }
-const findAllTodo = (data) =>{
-    console.log(data);
+const findAllTodo = (data) =>{    
     return{
         type: TODO_FIND_ALL,
         payload: data                
@@ -42,5 +43,11 @@ const deleteAllTodo = () =>{
         type: TODO_DELETE_ALL,              
     }
 }
+const editCurrentTodo = (id) =>{
+    return{
+        type: TODO_EDIT_CURRENT,
+        payload:id,              
+    }
+}
 
-export {addTodo,findAllTodo,deleteTodo,updateStateTodo,saveStateTodo,deleteAllTodo};
+export {addTodo,findAllTodo,deleteTodo,updateStateTodo,saveStateTodo,deleteAllTodo,editCurrentTodo};

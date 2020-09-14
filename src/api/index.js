@@ -6,8 +6,10 @@ import {store} from '../index';
 //   responseType: 'json',
 // });
 
-const token = localStorage.getItem('access_token');
-  
+// eslint-disable-next-line no-unused-vars
+
+
+//const token = localStorage.getItem('access_token'); 
 
 const API = axios.create({
    baseURL: 'http://localhost:3000',
@@ -40,10 +42,10 @@ export const addUser = async (data) =>{
   }          
 }
 
-export const getProfile = async () =>{    
-  try{
+export const getProfile = async (data) =>{ 
+  try{    
     const response = await API.get('/users/profile',{headers:{
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${data}`
     }
   }); 
     //console.log(response);
@@ -55,7 +57,7 @@ export const getProfile = async () =>{
 
 export const addTodo = async (todo) =>{    
   try{
-
+    const token = store.getState().token.access_token;
     //const token = localStorage.getItem('access_token');
     const response = await API.post('/todo/add',{
            name: todo.name,
@@ -74,24 +76,36 @@ export const addTodo = async (todo) =>{
 }
 export const getTodo = async (data) =>{   
   try{  
+    const username = store.getState().user.username;
+    const token = store.getState().token.access_token;
+    const currentPage =  store.getState().todo.currentPage;
+  
+
+    console.log(username);
+    console.log(token);
+    console.log(currentPage);
+
     const response = await API.get('/todo/find/all',
     {
       headers: {
-          "Authorization": `Bearer ${data.token || token}`
+          "Authorization": `Bearer ${token}`
       } ,
        params:{ 
-        username : data.username,
+        username : username,
+        page: currentPage || 1,
       }        
     }    
     )
-    
+    //console.log(response);
     return response; 
-  }catch(e){       
+  }catch(e){  
+    console.log(e);     
     return e;
   }          
 }
 
 export const setStateTodo = (id)  =>{
+  const token = store.getState().token.access_token;
     API.patch('/todo/state/update',{
       _id:id
     },
@@ -101,7 +115,8 @@ export const setStateTodo = (id)  =>{
 }
 
 
-export const deleteTodo = async(id) =>{          
+export const deleteTodo = async(id) =>{ 
+  const token = store.getState().token.access_token;         
     API.post('/todo/delete',{ _id:id},{      
         headers: {'Authorization': `Bearer ${token}`}
     });

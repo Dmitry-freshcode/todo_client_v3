@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styles from './Todo.module.scss'
 import {setStateTodo} from '../../../../../api'
 import {deleteTodo} from '../../../../../store/actionCreater/todo'
-import { format, parse } from 'date-fns'
+import { format} from 'date-fns'
 import { connect } from "react-redux";
-import classNames from 'classnames';
+//import classNames from 'classnames';
 
 class Todo extends Component {
     constructor(props) {
@@ -22,8 +22,8 @@ class Todo extends Component {
 
     render() {         
         const {_id,name , state , dueDate} = this.props.todo; 
-        console.log(this.state)
-        console.log(this.props.todo.state)
+        //console.log(this.state)
+        //console.log(this.props.todo.state)
         return (
             <li className={styles.todo}>
                 <div className={styles.data}>

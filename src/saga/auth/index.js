@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 import { USER_LOGIN,USER_LOGOUT,USER_AUTOLOGIN ,USER_ADD, USER_ADD_NAME} from '../../store/constants/user'
 import { TODO_FIND_ALL } from '../../store/constants/todo'
 import { loginUser,addUser,getProfile} from '../../api'
@@ -48,17 +48,17 @@ export function* workerLogout(){
 }
 
 export function* workerAutologin(){
-    const token = localStorage.getItem('access_token');    
-    if (token){
+    const token = localStorage.getItem('access_token');      
+    try{
         const profile = yield getProfile(token);
         if (profile.data.username){
             yield put(setToken(token));        
             yield put( {type: USER_ADD_NAME, payload:profile.data.username}) 
-            yield put( {type: TODO_FIND_ALL, payload:{token:token,username:profile.data.username}})   
-        }  else {
-            yield put(deleteToken());}
-    }             
-    
+            yield put( {type: TODO_FIND_ALL, payload:{token:token,username:profile.data.username}}) 
+        }  
+    }    catch {
+        yield put(deleteToken()); 
+    }
 }
 
 export function* workerAddUser(data){    

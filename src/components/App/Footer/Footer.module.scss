@@ -7,3 +7,9 @@
     height: 50px;
     background-color: rgb(17, 14, 177);
 }
+.indexList{    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

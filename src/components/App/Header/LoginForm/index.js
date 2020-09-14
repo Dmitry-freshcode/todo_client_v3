@@ -14,14 +14,16 @@ class LoginForm extends Component {
         };
       }
 
-  addNewUser =() =>{
+  addNewUser =(event) =>{
+    event.preventDefault();
     this.props.addUser({username: this.state.username,password: this.state.password});
     this.setState({
       username: '',      
       password:'', 
     })
   }
-  userLogin = () =>{
+  userLogin = (event) =>{
+    event.preventDefault();
     this.setState({
       username:'',      
       password:'', 
@@ -46,7 +48,7 @@ class LoginForm extends Component {
                 </label>
                 <label className={styles.password}>
                     Password
-                    <input onChange={this.changePassword} value={this.state.password} type="text" className={styles.loginInput}/>
+                    <input onChange={this.changePassword} value={this.state.password} type="password" className={styles.loginInput}/>
                 </label>                
                 <button disabled={!(this.state.username && this.state.password)}onClick={this.userLogin}>Login</button>
                 <button disabled={!(this.state.username && this.state.password)}onClick={this.addNewUser}>Add</button>

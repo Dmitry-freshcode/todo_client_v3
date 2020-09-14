@@ -11,9 +11,11 @@ class TodoListContainer extends Component {
     
     render() {
         
-        const todos= Object.values(this.props.todos);
-        //console.log(this.props.isLogin)
-       if(this.props.isLogin && todos.length>0){
+        const todos = this.props.todo.todos;
+        // console.log(this.props.todo.todos);
+          
+       if(this.props.isLogin && todos){
+        //console.log(todos);  
             return (
         <div className={styles.container}>
             <TodoList />                
@@ -27,7 +29,7 @@ class TodoListContainer extends Component {
 function mapStateToProps(state){
     return {        
         isLogin: state.user.isLogin,
-        todos: state.todo,
+        todo: state.todo,
      } 
   };
   const mapDispatchToProps =dispatch =>{
