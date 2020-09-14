@@ -3,8 +3,7 @@ import {
 	USER_AUTOLOGIN,
 	USER_ADD,
 	USER_ADD_NAME,
-	USER_LOGOUT
-	//LOGOUT_USER_SUCCESS,
+	USER_LOGOUT	
 } from '../constants/user';
 
 
@@ -15,26 +14,23 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER_LOGIN:			
-			return {
-				...state,
-                //username: action.payload.username,                				
-				//isLogin: true
-			};
-        case USER_AUTOLOGIN:			
-            return {
-				...state,
-                ...action.data             				
-				
-			};
-		case USER_ADD:
-			return {}
 		case USER_ADD_NAME:
 			return {
 				...state,
 				username: action.payload,
 				isLogin: true
 			}
+        case USER_LOGIN:			
+			return {
+				...state,                
+			};
+        case USER_AUTOLOGIN:			
+            return {
+				...state,
+				...action.data,
+			};
+		case USER_ADD:
+			return {};		
 		case USER_LOGOUT:
 			return {
 			...state,

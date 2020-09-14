@@ -1,11 +1,10 @@
 import { 
-    TODO_CREATE,
-	TODO_FIND_ALL,
+    TODO_CREATE,	
 	TODO_SAVE_STATE,
 	TODO_DELETE_ALL,
 	TODO_DELETE,
 	TODO_EDIT_CURRENT,
-    //TODO_UPDATE_STATE
+	TODO_DELETE_CURRENT   
 } from '../constants/todo';
 
 
@@ -18,13 +17,8 @@ const initialState = {
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case TODO_CREATE:			
-			return {...state};
-		case TODO_FIND_ALL:
-			console.log(action);			 	
-			 return state				
-			 ;
-		case TODO_SAVE_STATE:
-					
+			return {...state};		
+		case TODO_SAVE_STATE:					
 			return {				
 				...state,
 				...action.payload
@@ -33,8 +27,7 @@ const todoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				todos:[],
-				pages:'',
-				currentPage:'',				
+				pages:'',								
 			}
 		case TODO_DELETE:			
 			return state;
@@ -44,20 +37,11 @@ const todoReducer = (state = initialState, action) => {
 				...state,
 				currentPage:action.payload
 			}
-
-		// case USER_ADD:
-		// 	return {}
-		// case USER_ADD_NAME:
-		// 	return {
-		// 		...state,
-		// 		username: action.payload,
-		// 	}
-		// case USER_LOGOUT:
-		// 	return {
-		// 	...state,
-		// 	username:'',
-		// 	isLogin: false
-		// }      
+		case TODO_DELETE_CURRENT:			
+			return {
+				...state,
+				currentPage:''
+			}   
         default:
             return state;
     }

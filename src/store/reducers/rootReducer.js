@@ -11,6 +11,6 @@ const rootReducer = combineReducers({
      errors: errors,
      todo: todo
  });
-//const rootReducer = tokenReducer;
+
 
 export default rootReducer;

@@ -4,16 +4,12 @@ import classnames from 'classnames';
 import { connect } from "react-redux";
 import {editCurrentTodo} from '../../../../store/actionCreater/todo'
 
-
-
 class Index extends Component {
     constructor(props){
         super(props);
         this.state={            
         }
     }
-
-
  
     loadPage = () => {        
         if (this.props.index!==this.props.current){            
@@ -35,14 +31,12 @@ class Index extends Component {
 
 function mapStateToProps(state){
     return {        
-        username: state.user.username,
-        // currentPage: state.todo.currentPage,
+        username: state.user.username,        
      } 
   };
   const mapDispatchToProps =dispatch =>{
     return{
-        editCurrentTodo: (data)=>dispatch(editCurrentTodo(data)),
-       // addTodo: (data)=>dispatch(addTodo(data)),        
+        editCurrentTodo: (data)=>dispatch(editCurrentTodo(data)),              
     }
   }
   export default connect(mapStateToProps,mapDispatchToProps)(Index)

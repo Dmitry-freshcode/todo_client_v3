@@ -1,4 +1,10 @@
-import { USER_LOGIN,USER_AUTOLOGIN,USER_LOGOUT,USER_ADD,USER_ADD_NAME} from '../constants/user';
+import { 
+    USER_LOGIN,
+    USER_AUTOLOGIN,
+    USER_LOGOUT,
+    USER_ADD,
+    USER_ADD_NAME
+} from '../constants/user';
 
 
 const loginUser = (data) =>{

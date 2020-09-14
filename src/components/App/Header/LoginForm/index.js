@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import styles from './LoginForm.module.scss'
-//import API from '../../../../api';
 import { connect } from "react-redux";
-//import {setToken} from '../../../../store/actionCreater/'
 import {loginUser,addUser} from '../../../../store/actionCreater/user'
 
 class LoginForm extends Component {
@@ -16,20 +14,20 @@ class LoginForm extends Component {
 
   addNewUser =(event) =>{
     event.preventDefault();
-    this.props.addUser({username: this.state.username,password: this.state.password});
     this.setState({
       username: '',      
-      password:'', 
+      password: '', 
     })
+    this.props.addUser({username: this.state.username,password: this.state.password});  
   }
+
   userLogin = (event) =>{
     event.preventDefault();
     this.setState({
-      username:'',      
-      password:'', 
+      username: '',      
+      password: '', 
     })
-    this.props.loginUser({username: this.state.username,password: this.state.password})
-    
+    this.props.loginUser({username: this.state.username,password: this.state.password})    
   }
 
   changePassword = (event) => {    
@@ -39,7 +37,8 @@ class LoginForm extends Component {
   changeName = (event) => {    
     this.setState({ username: event.target.value });
   };
-    render() {     
+    render() {  
+      const {loginError,loginExError,userAddError} = this.props;
         return (
             <div className={styles.loginForm}>
                 <label className={styles.login}>
@@ -52,9 +51,9 @@ class LoginForm extends Component {
                 </label>                
                 <button disabled={!(this.state.username && this.state.password)}onClick={this.userLogin}>Login</button>
                 <button disabled={!(this.state.username && this.state.password)}onClick={this.addNewUser}>Add</button>
-                {this.props.loginError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>}
-                {this.props.loginExError && <div className={styles.error}>USERNAME IS EXIST</div>}
-                {this.props.userAddError && <div className={styles.userAddError}>USERNAME WAS CREATED</div>}
+                {loginError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>}
+                {loginExError && <div className={styles.error}>USERNAME IS EXIST</div>}
+                {userAddError && <div className={styles.userAddError}>USERNAME WAS CREATED</div>}
             </div>                  
         )
     }
@@ -69,8 +68,7 @@ function mapStateToProps(state){
    } 
 };
 const mapDispatchToProps =dispatch =>{
-  return{
-    //setToken: (token)=>dispatch(setToken(token)),
+  return{  
     loginUser: (data)=>dispatch(loginUser(data)),
     addUser : (data)=>dispatch(addUser(data)),
   }

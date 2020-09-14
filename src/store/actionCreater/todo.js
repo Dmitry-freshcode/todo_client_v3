@@ -1,11 +1,11 @@
 import { 
-    TODO_CREATE,
-    TODO_FIND_ALL,
+    TODO_CREATE,    
     TODO_DELETE,
     TODO_UPDATE_STATE,
     TODO_SAVE_STATE,
     TODO_DELETE_ALL,
-    TODO_EDIT_CURRENT
+    TODO_EDIT_CURRENT,
+    TODO_DELETE_CURRENT
 } from '../constants/todo';
 
 const addTodo = (data) =>{    
@@ -14,12 +14,7 @@ const addTodo = (data) =>{
         payload: data       
     }
 }
-const findAllTodo = (data) =>{    
-    return{
-        type: TODO_FIND_ALL,
-        payload: data                
-    }
-}
+
 const deleteTodo = (data) =>{
     return{
         type: TODO_DELETE, 
@@ -40,7 +35,7 @@ const saveStateTodo = (data) =>{
 }
 const deleteAllTodo = () =>{
     return{
-        type: TODO_DELETE_ALL,              
+        type: TODO_DELETE_ALL,                      
     }
 }
 const editCurrentTodo = (id) =>{
@@ -49,5 +44,17 @@ const editCurrentTodo = (id) =>{
         payload:id,              
     }
 }
+const deleteCurrentTodo = (id) =>{
+    return{
+        type: TODO_DELETE_CURRENT,                    
+    }
+}
 
-export {addTodo,findAllTodo,deleteTodo,updateStateTodo,saveStateTodo,deleteAllTodo,editCurrentTodo};
+export {
+    addTodo,    
+    deleteTodo,
+    updateStateTodo,
+    saveStateTodo,
+    deleteAllTodo,
+    editCurrentTodo,
+    deleteCurrentTodo};

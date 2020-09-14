@@ -11,19 +11,15 @@ class Todo extends Component {
         super(props);
         this.state={
             state: this.props.todo.state,
-        }
-        
+        }        
       }
+
       setState = async () => {
         await setStateTodo(this.props.todo._id);
-        //this.setState({state: !this.state.state});
-
-    }
+        }
 
     render() {         
-        const {_id,name , state , dueDate} = this.props.todo; 
-        //console.log(this.state)
-        //console.log(this.props.todo.state)
+        const {_id,name , state , dueDate} = this.props.todo;      
         return (
             <li className={styles.todo}>
                 <div className={styles.data}>
@@ -42,13 +38,10 @@ class Todo extends Component {
     }
 }
 function mapStateToProps(state){
-    return {        
-        //todos: state.todo,
-     } 
+    return {} 
   };
   const mapDispatchToProps =dispatch =>{
-    return{
-        //findAllTodo: (data)=>dispatch(findAllTodo(data)),
+    return{        
        deleteTodo: (data)=>dispatch(deleteTodo(data)),        
     }
   }

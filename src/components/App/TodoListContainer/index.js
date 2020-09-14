@@ -9,13 +9,9 @@ class TodoListContainer extends Component {
         };
       }
     
-    render() {
-        
-        const todos = this.props.todo.todos;
-        // console.log(this.props.todo.todos);
-          
-       if(this.props.isLogin && todos){
-        //console.log(todos);  
+    render() {        
+        const todos = this.props.todo.todos;          
+       if(this.props.isLogin && todos){        
             return (
         <div className={styles.container}>
             <TodoList />                
@@ -33,9 +29,6 @@ function mapStateToProps(state){
      } 
   };
   const mapDispatchToProps =dispatch =>{
-    return{
-        //findAllTodo: (data)=>dispatch(findAllTodo(data)),
-       // addTodo: (data)=>dispatch(addTodo(data)),        
-    }
+    return{}
   }
   export default connect(mapStateToProps,mapDispatchToProps)(TodoListContainer)

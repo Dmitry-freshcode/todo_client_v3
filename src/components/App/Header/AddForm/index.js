@@ -3,7 +3,6 @@ import styles from './AddForm.module.scss'
 import { connect } from "react-redux";
 import {logoutUser} from '../../../../store/actionCreater/user'
 import {addTodo} from '../../../../store/actionCreater/todo'
-//import {deleteToken} from '../../../../store/actionCreater/index'
 
 class AddForm extends Component {
     constructor() {
@@ -14,10 +13,6 @@ class AddForm extends Component {
         };
       }
 
-    // logoutUser= () => {
-    //     localStorage.removeItem('access_token');
-    //     this.props.deleteToken();
-    // }
     dataSet = (event) =>{
         this.setState({ date: event.target.value });
     }
@@ -26,8 +21,7 @@ class AddForm extends Component {
     }
     addTodo = (event) =>{
         event.preventDefault();
-        this.props.addTodo(  {
-            username: this.props.username,
+        this.props.addTodo({           
             name: this.state.text,            
             dueDate: this.state.date
         });

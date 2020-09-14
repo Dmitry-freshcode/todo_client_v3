@@ -1,7 +1,20 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { USER_LOGIN,USER_LOGOUT,USER_AUTOLOGIN ,USER_ADD, USER_ADD_NAME} from '../../store/constants/user'
-import { TODO_FIND_ALL } from '../../store/constants/todo'
-import { loginUser,addUser,getProfile} from '../../api'
+import { 
+    USER_LOGIN,
+    USER_LOGOUT,
+    USER_AUTOLOGIN,
+    USER_ADD,
+    USER_ADD_NAME
+} from '../../store/constants/user'
+import { 
+    TODO_EDIT_CURRENT,    
+    TODO_DELETE_CURRENT
+} from '../../store/constants/todo'
+import {
+    loginUser,
+    addUser,
+    getProfile,    
+} from '../../api'
 import { setToken,deleteToken } from '../../store/actionCreater/token'
 import { deleteAllTodo } from '../../store/actionCreater/todo'
 import {
@@ -15,6 +28,7 @@ import {
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
+
 export function* watchActionAuth() {    
 	yield takeEvery(USER_LOGIN, workerLogin);
 	yield takeEvery(USER_LOGOUT, workerLogout);
@@ -22,48 +36,51 @@ export function* watchActionAuth() {
     yield takeEvery(USER_ADD, workerAddUser);  
 }
 
-export function* workerLogin(data){      
-    try{
-        const response = yield loginUser(data.payload); 
-        const token = response.data.access_token;
-        //console.log(token)
-        const username = data.payload.username;
-        localStorage.setItem("access_token",token);      
-        yield put(setToken(token));
-        yield put( {type: USER_ADD_NAME, payload:username}) 
-        yield put( {type: TODO_FIND_ALL, payload:{token:token,username:username}})
-    } catch{
-        yield put(addLoginError());
-        yield delay(2000);
-        yield put(subLoginError());
-        console.log('неверный логин или пароль');
-    }   
-}
-
-export function* workerLogout(){    
-    localStorage.removeItem("access_token"); 
-    yield put(deleteToken());
-    yield put(deleteAllTodo());
-
+function* getTodos(token,username){  
+    let currentPage = yield localStorage.getItem("currentPage"); 
+    currentPage = !currentPage? 1 : currentPage;        
+    yield put(setToken(token));    
+    yield put( {type: USER_ADD_NAME, payload:username})    
+    yield put( {type: TODO_EDIT_CURRENT, payload:currentPage});   
 }
 
 export function* workerAutologin(){
-    const token = localStorage.getItem('access_token');      
+    const token = yield localStorage.getItem('access_token');         
     try{
-        const profile = yield getProfile(token);
-        if (profile.data.username){
-            yield put(setToken(token));        
-            yield put( {type: USER_ADD_NAME, payload:profile.data.username}) 
-            yield put( {type: TODO_FIND_ALL, payload:{token:token,username:profile.data.username}}) 
-        }  
+        const profile = yield getProfile(token);        
+        yield getTodos(token,profile.data.username);                 
     }    catch {
         yield put(deleteToken()); 
     }
 }
 
+export function* workerLogin(data){      
+    try{
+        const response = yield loginUser(data.payload); 
+        const token = response.data.access_token;        
+        const username = data.payload.username;
+        localStorage.setItem("access_token",token);      
+        yield getTodos(token,username)  
+        
+    } catch{
+        yield put(addLoginError());    
+        console.log('неверный логин или пароль');   
+        yield delay(2000);
+        yield put(subLoginError());        
+    }   
+}
+
+export function* workerLogout(){    
+    yield put( {type: TODO_DELETE_CURRENT})    
+    yield put(deleteToken());    
+    yield put(deleteAllTodo());
+    localStorage.removeItem("currentPage");
+    localStorage.removeItem("access_token"); 
+}
+   
 export function* workerAddUser(data){    
-    const response = yield addUser(data.payload);    
-    if(response.data.status === 'userIsExist'){  
+    const response = yield addUser(data.payload);       
+    if(response.response.status === 400){  
           console.log('логин занят');       
           yield put(addExLoginError());          
           yield delay(2000);
@@ -74,8 +91,4 @@ export function* workerAddUser(data){
         yield delay(2000);
         yield put(subUserAddError());
     }
-
-
-    
-    
 }

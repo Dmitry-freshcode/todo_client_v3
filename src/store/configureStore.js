@@ -1,8 +1,3 @@
-//import { routerReducer, routerMiddleware } from 'react-router-redux';
-//import history from '../utils/history';
-//import userReducer from '../reducers/user';
-
-
 import {
     createStore,    
     compose,
