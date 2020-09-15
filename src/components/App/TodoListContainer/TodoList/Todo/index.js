@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Todo.module.scss'
+import PropTypes from 'prop-types';
 import {setStateTodo} from '../../../../../api'
 import {deleteTodo} from '../../../../../store/actionCreater/todo'
 import { format} from 'date-fns'
@@ -37,6 +38,11 @@ class Todo extends Component {
         )
     }
 }
+
+Todo.propTypes = {   
+    todo: PropTypes.object.isRequired,    
+}
+
 function mapStateToProps(state){
     return {} 
   };

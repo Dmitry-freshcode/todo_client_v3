@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import styles from './Footer.module.scss';
 import Index from './Index';
@@ -23,6 +24,11 @@ class Footer extends Component {
             </div>
         )
     }
+}
+
+Footer.propTypes = {   
+    pages: PropTypes.number, 
+    currentPage: PropTypes.number,   
 }
 
 function mapStateToProps(state){

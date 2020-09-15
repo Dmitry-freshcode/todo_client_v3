@@ -9,9 +9,9 @@ import {
 
 
 const initialState = {
-	todos:'',
+	todos:[],
 	currentPage:1,
-	pages:'',
+	pages:0,
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -27,7 +27,7 @@ const todoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				todos:[],
-				pages:'',								
+				pages:0,								
 			}
 		case TODO_DELETE:			
 			return state;

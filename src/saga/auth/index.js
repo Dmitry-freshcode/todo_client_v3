@@ -41,17 +41,20 @@ function* getTodos(token,username){
     currentPage = !currentPage? 1 : currentPage;        
     yield put(setToken(token));    
     yield put( {type: USER_ADD_NAME, payload:username})    
-    yield put( {type: TODO_EDIT_CURRENT, payload:currentPage});   
+    yield put( {type: TODO_EDIT_CURRENT, payload:Number(currentPage)});   
 }
 
 export function* workerAutologin(){
-    const token = yield localStorage.getItem('access_token');         
-    try{
-        const profile = yield getProfile(token);        
-        yield getTodos(token,profile.data.username);                 
-    }    catch {
-        yield put(deleteToken()); 
-    }
+    const token = yield localStorage.getItem('access_token');
+    if(token)  {
+        try{
+            const profile = yield getProfile(token);                
+            yield getTodos(token,profile.data.username);                 
+        }    catch {
+            yield put(deleteToken()); 
+        }
+    }       
+ 
 }
 
 export function* workerLogin(data){      

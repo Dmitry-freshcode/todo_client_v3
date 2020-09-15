@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Todo from './Todo';
+import PropTypes from 'prop-types';
 import styles from './TodoList.module.scss'
 import { connect } from "react-redux";
 
@@ -24,6 +25,10 @@ class TodoList extends Component {
             </ul>
         )
     }
+}
+
+TodoList.propTypes = {   
+    todos: PropTypes.object.isRequired,    
 }
 
 function mapStateToProps(state){

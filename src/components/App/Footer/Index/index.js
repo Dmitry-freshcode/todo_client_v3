@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Index.module.scss'
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import {editCurrentTodo} from '../../../../store/actionCreater/todo'
@@ -28,6 +29,11 @@ class Index extends Component {
        
     }
 }
+
+Index.propTypes = {   
+    username: PropTypes.string.isRequired,        
+}
+
 
 function mapStateToProps(state){
     return {        

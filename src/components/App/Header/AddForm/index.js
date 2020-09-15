@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './AddForm.module.scss'
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import {logoutUser} from '../../../../store/actionCreater/user'
 import {addTodo} from '../../../../store/actionCreater/todo'
@@ -41,7 +42,7 @@ class AddForm extends Component {
             </div>
             <div className={styles.addTodo}>
                 <input onChange={this.dataSet} type="date" value={this.state.date} className={styles.date}  name="start"  min="2020-01-01" max="2025-12-31"/>
-                <input onChange={this.textSet} type="text" value={this.state.text} id="newTodo"/> 
+                <input onChange={this.textSet} type="text" value={this.state.text} id="newTodo" placeholder="new todo"/> 
                 <button disabled={!(this.state.text && this.state.date)} onClick={this.addTodo}>Add todo</button>
             </div>
         </div>            
@@ -49,6 +50,9 @@ class AddForm extends Component {
     }
 }
 
+AddForm.propTypes = {   
+    username: PropTypes.string.isRequired,         
+  }
 
 function mapStateToProps( state){
     return {

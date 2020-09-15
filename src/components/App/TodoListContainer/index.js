@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import TodoList from './TodoList'
+import PropTypes from 'prop-types';
 import styles from './TodoListContainer.module.scss'
 class TodoListContainer extends Component {
     constructor(props) {
@@ -20,6 +21,11 @@ class TodoListContainer extends Component {
     }
        return <></>;
     }
+}
+
+TodoListContainer.propTypes = {   
+    todo: PropTypes.object,
+    isLogin: PropTypes.bool,
 }
 
 function mapStateToProps(state){

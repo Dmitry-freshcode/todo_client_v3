@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './LoginForm.module.scss'
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import {loginUser,addUser} from '../../../../store/actionCreater/user'
 
@@ -8,7 +9,9 @@ class LoginForm extends Component {
         super(props);
         this.state = {
           username:'',      
-          password:'',         
+          password:'',
+          isValidPass: false,   
+          isValidName: false,      
         };
       }
 
@@ -31,26 +34,42 @@ class LoginForm extends Component {
   }
 
   changePassword = (event) => {    
-    this.setState({ password: event.target.value });
+    this.setState({
+      password: event.target.value,
+      isValidPass: this.validation(event.target.value),
+    });
+    
   };
 
-  changeName = (event) => {    
-    this.setState({ username: event.target.value });
+  changeName = (event) => { 
+    this.setState({
+       username: event.target.value,
+       isValidName: this.validation(event.target.value),
+      });   
   };
-    render() {  
+
+  validation = (target) =>{     
+   if(target.length>=4){
+     return true
+    }else{
+      return false
+    }
+  };
+
+    render() {        
       const {loginError,loginExError,userAddError} = this.props;
         return (
             <div className={styles.loginForm}>
                 <label className={styles.login}>
                     Login
-                    <input type="text" onChange={this.changeName} value={this.state.username} className={styles.passwordInput}/>
+                    <input type="text" onChange={this.changeName} value={this.state.username} className={styles.passwordInput} placeholder="Login"/>
                 </label>
                 <label className={styles.password}>
                     Password
-                    <input onChange={this.changePassword} value={this.state.password} type="password" className={styles.loginInput}/>
+                    <input onChange={this.changePassword} value={this.state.password} type="password" className={styles.loginInput} placeholder="Password"/>
                 </label>                
-                <button disabled={!(this.state.username && this.state.password)}onClick={this.userLogin}>Login</button>
-                <button disabled={!(this.state.username && this.state.password)}onClick={this.addNewUser}>Add</button>
+                <button disabled={!this.state.isValidPass || !this.state.isValidName}onClick={this.userLogin}>Login</button>
+                <button disabled={!this.state.isValidPass || !this.state.isValidName}onClick={this.addNewUser}>Add</button>
                 {loginError && <div className={styles.error}>WRONG PASSWORD OR USERNAME</div>}
                 {loginExError && <div className={styles.error}>USERNAME IS EXIST</div>}
                 {userAddError && <div className={styles.userAddError}>USERNAME WAS CREATED</div>}
@@ -58,6 +77,13 @@ class LoginForm extends Component {
         )
     }
 }
+
+LoginForm.propTypes = {   
+  loginError: PropTypes.bool,  
+  loginExError: PropTypes.bool,
+  userAddError: PropTypes.bool,      
+}
+
 
 
 function mapStateToProps(state){
