@@ -9,7 +9,7 @@ class Footer extends Component {
     mapIndex = (pages,currentPage) =>{
         const indexes = [];
         for (let i=1; i<=pages; i++){
-            indexes.push(<Index key={i} index={i} current={currentPage}/>)
+            indexes.push(<Index key={i} index={i}/>)
         }        
         return indexes;
     }
@@ -27,17 +27,15 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {   
-    pages: PropTypes.number, 
-    currentPage: PropTypes.number,   
+    pages: PropTypes.number,       
 }
 
 function mapStateToProps(state){
     return {        
-        pages: state.todo.pages,
-        currentPage: state.todo.currentPage,
-     } 
+        pages:state.todo.pages
+    } 
   };
   const mapDispatchToProps =dispatch =>{
-    return{}
+    return {};
   }
   export default connect(mapStateToProps,mapDispatchToProps)(Footer)

@@ -3,8 +3,13 @@ import LoginForm from './LoginForm'
 import AddForm from './AddForm'
 import styles from './Header.module.scss'
 import { connect } from "react-redux";
+import {subscribeToLogin} from '../../../api/socket'
 
 class Header extends Component {
+
+    componentDidMount(){
+        subscribeToLogin();
+    }
     render() {
         const token = this.props.token;
         return (

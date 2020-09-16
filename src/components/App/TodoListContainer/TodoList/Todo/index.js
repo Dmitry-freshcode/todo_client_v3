@@ -5,7 +5,8 @@ import {setStateTodo} from '../../../../../api'
 import {deleteTodo} from '../../../../../store/actionCreater/todo'
 import { format} from 'date-fns'
 import { connect } from "react-redux";
-//import classNames from 'classnames';
+import {sendReload} from '../../../../../api/socket'
+
 
 class Todo extends Component {
     constructor(props) {
@@ -16,11 +17,18 @@ class Todo extends Component {
       }
 
       setState = async () => {
-        await setStateTodo(this.props.todo._id);
-        }
+          try{
+            await setStateTodo(this.props.todo._id);
+            await sendReload();
+          }catch (e){
+                console.log(e);
+          }
+         }
 
-    render() {         
-        const {_id,name , state , dueDate} = this.props.todo;      
+    render() {  
+              
+        const {_id,name , state , dueDate} = this.props.todo; 
+           
         return (
             <li className={styles.todo}>
                 <div className={styles.data}>
@@ -29,7 +37,7 @@ class Todo extends Component {
                 <div className={styles.todName}>
                     {name}
                 </div>
-                <input type="checkbox" defaultChecked={state} onClick={this.setState}/>
+                <input type="checkbox" checked={state} onChange={this.setState}/>
                 <div className={styles.delete} onClick={()=>this.props.deleteTodo(_id)}>
                     delete
                 </div>

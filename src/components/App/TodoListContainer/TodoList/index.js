@@ -17,7 +17,7 @@ class TodoList extends Component {
       } 
 
     render() {      
-        const todos= this.props.todos.todos;
+        const todos= this.props.todos.todos;        
         const maps = todos.map((todo,i) => <Todo key={todo._id} todo={todo}/>);       
         return (
             <ul className={styles.TodoList}>

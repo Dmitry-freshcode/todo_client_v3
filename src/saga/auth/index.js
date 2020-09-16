@@ -25,6 +25,7 @@ import {
     addUserAddError,
     subUserAddError,
 } from '../../store/actionCreater/errors'
+import {sendLogout} from '../../api/socket'
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
@@ -45,18 +46,16 @@ function* getTodos(token,username){
 }
 
 export function* workerAutologin(){
-    const token = yield localStorage.getItem('access_token');
+    const token = yield localStorage.getItem('access_token');    
     if(token)  {
-        try{
-            
-            const profile = yield getProfile(token);                
+        try{            
+            const profile = yield getProfile(token);                           
             yield getTodos(token,profile.data.username);                 
         }    catch {
             yield put(deleteToken()); 
         }
-    }       
- 
-}
+    }     
+ }
 
 export function* workerLogin(data){      
     try{
@@ -75,11 +74,12 @@ export function* workerLogin(data){
 }
 
 export function* workerLogout(){    
-    yield put( {type: TODO_DELETE_CURRENT})    
-    yield put(deleteToken());    
-    yield put(deleteAllTodo());
+    yield put( {type: TODO_DELETE_CURRENT})
     localStorage.removeItem("currentPage");
-    localStorage.removeItem("access_token"); 
+    localStorage.removeItem("access_token");     
+    yield put(deleteToken());    
+    yield put(deleteAllTodo());   
+    yield sendLogout();    
 }
    
 export function* workerAddUser(data){    

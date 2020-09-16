@@ -4,17 +4,23 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import {logoutUser} from '../../../../store/actionCreater/user';
 import {addTodo} from '../../../../store/actionCreater/todo';
-import {subscribeToReload} from '../../../../api/socket'
+import {subscribeToReload,sendLogin,subscribeToLogout} from '../../../../api/socket'
 
 class AddForm extends Component {
     constructor() {  
        subscribeToReload();
+       subscribeToLogout();
+       
         super();
         this.state = {
             text: '',      
             date:'',         
         };
       }
+
+    componentDidMount(){
+        sendLogin();
+    }
 
     dataSet = (event) =>{
         this.setState({ date: event.target.value });
@@ -34,13 +40,17 @@ class AddForm extends Component {
         })
     }
 
+    logout=()=>{
+        this.props.logoutUser();        
+    }
+
 
     render() {        
         return (
         <div className={styles.addForm}>
             <div className={styles.greeting}>
                 <p>Welcome , {this.props.username}</p>
-                <button onClick={this.props.logoutUser}>Logout</button>                
+                <button onClick={this.logout}>Logout</button>                
             </div>
             <div className={styles.addTodo}>
                 <input onChange={this.dataSet} type="date" value={this.state.date} className={styles.date}  name="start"  min="2020-01-01" max="2025-12-31"/>

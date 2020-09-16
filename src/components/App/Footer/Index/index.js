@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { connect } from "react-redux";
 import {editCurrentTodo} from '../../../../store/actionCreater/todo'
 
+
 class Index extends Component {
     constructor(props){
         super(props);
@@ -14,12 +15,13 @@ class Index extends Component {
  
     loadPage = () => {        
         if (this.props.index!==this.props.current){            
-            this.props.editCurrentTodo(this.props.index);
+            this.props.editCurrentTodo(this.props.index);            
         }
     }
 
-    render() {       
-        const {index, current} = this.props;  
+    render() {  
+        const current = this.props.currentPage;     
+        const {index} = this.props;  
         let classNames = classnames(styles.index, { [styles.current]: index===current });        
         return (
             <li>
@@ -30,14 +32,15 @@ class Index extends Component {
     }
 }
 
-Index.propTypes = {   
-    username: PropTypes.string.isRequired,        
+Index.propTypes = {    
+    currentPage: PropTypes.number,
+    index: PropTypes.number,
 }
 
 
 function mapStateToProps(state){
     return {        
-        username: state.user.username,        
+        currentPage: state.todo.currentPage,
      } 
   };
   const mapDispatchToProps =dispatch =>{
