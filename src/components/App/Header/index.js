@@ -5,9 +5,6 @@ import styles from './Header.module.scss'
 import { connect } from "react-redux";
 
 class Header extends Component {
-    componentDidMount(){}
-       
-   
     render() {
         const token = this.props.token;
         return (

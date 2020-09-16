@@ -5,12 +5,13 @@ import Footer from './Footer'
 import styles from './App.module.scss';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import {autologinUser} from '../../store/actionCreater/user'
+import {autologinUser} from '../../store/actionCreater/user';
 
 
 
-class App extends Component {
-    constructor(props) {
+
+class App extends Component {    
+    constructor(props) {        
         super(props);
         this.state = {
             isLogin:false,         

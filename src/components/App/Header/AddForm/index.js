@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import styles from './AddForm.module.scss'
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import {logoutUser} from '../../../../store/actionCreater/user'
-import {addTodo} from '../../../../store/actionCreater/todo'
+import {logoutUser} from '../../../../store/actionCreater/user';
+import {addTodo} from '../../../../store/actionCreater/todo';
+import {subscribeToReload} from '../../../../api/socket'
 
 class AddForm extends Component {
-    constructor() {
+    constructor() {  
+       subscribeToReload();
         super();
         this.state = {
             text: '',      
@@ -54,7 +56,7 @@ AddForm.propTypes = {
     username: PropTypes.string.isRequired,         
   }
 
-function mapStateToProps( state){
+function mapStateToProps(state){
     return {
         username: state.user.username,
      } 

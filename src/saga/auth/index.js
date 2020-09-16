@@ -48,6 +48,7 @@ export function* workerAutologin(){
     const token = yield localStorage.getItem('access_token');
     if(token)  {
         try{
+            
             const profile = yield getProfile(token);                
             yield getTodos(token,profile.data.username);                 
         }    catch {
@@ -63,7 +64,7 @@ export function* workerLogin(data){
         const token = response.data.access_token;        
         const username = data.payload.username;
         localStorage.setItem("access_token",token);      
-        yield getTodos(token,username)  
+        yield getTodos(token,username)        
         
     } catch{
         yield put(addLoginError());    

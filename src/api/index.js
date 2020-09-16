@@ -2,9 +2,9 @@ import axios from 'axios';
 import {store} from '../index';
 
 const API = axios.create({
-   baseURL: 'http://localhost:3000',
-   responseType: 'json',
-   });
+  baseURL: 'http://localhost:3000',
+  responseType: 'json',
+  });
 
 export const loginUser = async (data) =>{    
   try{
@@ -20,7 +20,7 @@ export const loginUser = async (data) =>{
 }
 
 export const addUser = async (data) =>{    
-  try{
+  try{    
     const response = await API.post('/users/add',{
       username: data.username,
       password: data.password      

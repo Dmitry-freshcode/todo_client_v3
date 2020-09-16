@@ -4,7 +4,8 @@ import {
 	TODO_DELETE_ALL,
 	TODO_DELETE,
 	TODO_EDIT_CURRENT,
-	TODO_DELETE_CURRENT   
+	TODO_DELETE_CURRENT,
+	TODO_FIND 
 } from '../constants/todo';
 
 
@@ -41,7 +42,9 @@ const todoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				currentPage:''
-			}   
+			} 
+		case TODO_FIND:
+			return state;  
         default:
             return state;
     }

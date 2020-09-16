@@ -5,7 +5,8 @@ import {
     TODO_SAVE_STATE,
     TODO_DELETE_ALL,
     TODO_EDIT_CURRENT,
-    TODO_DELETE_CURRENT
+    TODO_DELETE_CURRENT,
+    TODO_FIND
 } from '../constants/todo';
 
 const addTodo = (data) =>{    
@@ -49,6 +50,11 @@ const deleteCurrentTodo = (id) =>{
         type: TODO_DELETE_CURRENT,                    
     }
 }
+const findTodos =() =>{    
+    return {
+        type: TODO_FIND,
+    }
+}
 
 export {
     addTodo,    
@@ -57,4 +63,6 @@ export {
     saveStateTodo,
     deleteAllTodo,
     editCurrentTodo,
-    deleteCurrentTodo};
+    deleteCurrentTodo,
+    findTodos,
+};
