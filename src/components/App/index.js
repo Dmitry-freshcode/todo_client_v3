@@ -10,6 +10,7 @@ import {autologinUser} from '../../store/actionCreater/user';
 
 
 
+
 class App extends Component {    
     constructor(props) {        
         super(props);
@@ -18,8 +19,8 @@ class App extends Component {
         };
       }
 
-     componentDidMount(){
-        this.props.autologinUser();    
+     componentDidMount(){         
+        this.props.autologinUser();        
         }
     render() {
              

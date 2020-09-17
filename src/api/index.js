@@ -66,18 +66,23 @@ export const getTodo = async () =>{
   try{  
     const username = store.getState().user.username;
     const token = store.getState().token.access_token;
-    let currentPage =  store.getState().todo.currentPage;
-    const response = await API.get('/todo/find/all',
-    {
-      headers: {
-          "Authorization": `Bearer ${token}`
-      } ,
-       params:{ 
-        username : username,
-        page: currentPage,
-      }        
-    })    
-    return response; 
+    //let currentPage =  store.getState().todo.currentPage;
+    const currentPage = localStorage.getItem('currentPage')
+    if(username && token && currentPage){
+      const response = await API.get('/todo/find/all',
+      {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        } ,
+         params:{ 
+          username : username,
+          page: currentPage,
+        }        
+      })    
+      return response;
+    }
+
+  
   }catch(e){  
     console.log(e);     
     return e;

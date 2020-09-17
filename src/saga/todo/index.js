@@ -17,13 +17,17 @@ export function* watchActionTodo() {
 	yield takeEvery(TODO_CREATE, workerAddTodo);    
     yield takeEvery(TODO_DELETE, workerDeleteTodo);
     yield takeEvery(TODO_EDIT_CURRENT, workerEditCurrent);
-    yield takeEvery(TODO_FIND, FindTodo); 
+    yield takeEvery(TODO_FIND, workerFindTodo); 
 }
 
-export function* FindTodo(){ 
+export function* workerFindTodo(){ 
     try{        
-        const request = yield getTodo();
-        yield put( {type: TODO_SAVE_STATE, payload: request.data})
+        const request = yield getTodo(); 
+        //console.log(request);       
+        if(request) {
+            yield put( {type: TODO_SAVE_STATE, payload: request.data})
+        }    
+        
     } catch (e) {
         console.log(e);
     }  
@@ -31,19 +35,21 @@ export function* FindTodo(){
 
 export function* workerAddTodo(data){    
     yield addTodo(data.payload)
-    yield sendReload();
-    yield FindTodo();
+    //yield sendReload();
+    //yield FindTodo();
 }
 
 export function* workerDeleteTodo(data){        
      yield deleteTodo(data.payload);
      yield put({type: TODO_DELETE_ALL})
-     yield sendReload();
-     yield FindTodo();   
+     //yield sendReload();
+     //yield FindTodo();   
 }
 
 export function* workerEditCurrent(data){    
-    localStorage.setItem("currentPage",data.payload); 
-    yield FindTodo();
+    localStorage.setItem("currentPage",data.payload);
+    //yield FindTodo(); 
+    yield sendReload();
+    //yield FindTodo();
     
 }

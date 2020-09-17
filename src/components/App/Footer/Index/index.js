@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import {editCurrentTodo} from '../../../../store/actionCreater/todo'
+//import {sendReload} from '../../../../api/socket'
 
 class Index extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ class Index extends Component {
     loadPage = () => {        
         if (this.props.index!==this.props.current){            
             this.props.editCurrentTodo(this.props.index);
+            
         }
     }
 

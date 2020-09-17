@@ -13,12 +13,19 @@ export const store = initStore();
 
 sagaMiddleware.run(rootSaga);
 
+// const app = (
+//   <React.StrictMode>
+//     <Provider store={store} >
+//       <App />
+//     </Provider>
+//   </React.StrictMode>
+// );
 const app = (
-  <React.StrictMode>
+  
     <Provider store={store} >
       <App />
     </Provider>
-  </React.StrictMode>
+  
 );
 
 

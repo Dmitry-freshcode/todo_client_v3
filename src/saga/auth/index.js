@@ -25,6 +25,7 @@ import {
     addUserAddError,
     subUserAddError,
 } from '../../store/actionCreater/errors'
+import {sendLogin,sendLogout} from '../../api/socket'
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
@@ -37,18 +38,17 @@ export function* watchActionAuth() {
 }
 
 function* getTodos(token,username){  
-    let currentPage = yield localStorage.getItem("currentPage"); 
+    let currentPage = yield localStorage.getItem("currentPage");     
     currentPage = !currentPage? 1 : currentPage;        
     yield put(setToken(token));    
-    yield put( {type: USER_ADD_NAME, payload:username})    
+    yield put( {type: USER_ADD_NAME, payload:username});      
     yield put( {type: TODO_EDIT_CURRENT, payload:Number(currentPage)});   
 }
 
 export function* workerAutologin(){
-    const token = yield localStorage.getItem('access_token');
+    const token = yield localStorage.getItem('access_token');    
     if(token)  {
-        try{
-            
+        try{            
             const profile = yield getProfile(token);                
             yield getTodos(token,profile.data.username);                 
         }    catch {
@@ -63,8 +63,10 @@ export function* workerLogin(data){
         const response = yield loginUser(data.payload); 
         const token = response.data.access_token;        
         const username = data.payload.username;
-        localStorage.setItem("access_token",token);      
-        yield getTodos(token,username)        
+        yield localStorage.setItem("access_token",token);        
+        yield sendLogin();        
+        yield getTodos(token,username);
+           
         
     } catch{
         yield put(addLoginError());    
@@ -74,12 +76,14 @@ export function* workerLogin(data){
     }   
 }
 
-export function* workerLogout(){    
+
+export function* workerLogout(){
+    localStorage.removeItem("currentPage");
+    localStorage.removeItem("access_token");     
     yield put( {type: TODO_DELETE_CURRENT})    
     yield put(deleteToken());    
     yield put(deleteAllTodo());
-    localStorage.removeItem("currentPage");
-    localStorage.removeItem("access_token"); 
+    sendLogout();
 }
    
 export function* workerAddUser(data){    

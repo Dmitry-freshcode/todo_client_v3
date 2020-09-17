@@ -39,8 +39,8 @@ const deleteAllTodo = () =>{
         type: TODO_DELETE_ALL,                      
     }
 }
-const editCurrentTodo = (id) =>{
-    return{
+const editCurrentTodo = (id) =>{    
+    return{        
         type: TODO_EDIT_CURRENT,
         payload:id,              
     }
@@ -50,7 +50,7 @@ const deleteCurrentTodo = (id) =>{
         type: TODO_DELETE_CURRENT,                    
     }
 }
-const findTodos =() =>{    
+const findTodos =() =>{      
     return {
         type: TODO_FIND,
     }

@@ -3,6 +3,7 @@ import styles from './LoginForm.module.scss'
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import {loginUser,addUser} from '../../../../store/actionCreater/user'
+import {subscribeToLogin,sendLogin} from '../../../../api/socket'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class LoginForm extends Component {
           isValidName: false,      
         };
       }
+
+  componentDidMount(){
+    subscribeToLogin();
+  }
 
   addNewUser =(event) =>{
     event.preventDefault();
@@ -30,7 +35,8 @@ class LoginForm extends Component {
       username: '',      
       password: '', 
     })
-    this.props.loginUser({username: this.state.username,password: this.state.password})    
+    this.props.loginUser({username: this.state.username,password: this.state.password});
+    //sendLogin();  
   }
 
   changePassword = (event) => {    
